@@ -1,4 +1,4 @@
-![](swiss-votes-logo.png){width="200px" fig-alt="An icon combining the red Swiss shield with a white cross and a ballot box indicating a vote."}
+<img src="swiss-votes-logo.png" width="200" alt="An icon combining the red Swiss shield with a white cross and a ballot box indicating a vote.">
 
 # 175 Years of Direct Democracy: A Quantitative Analysis of Swiss Federal Votes
 
