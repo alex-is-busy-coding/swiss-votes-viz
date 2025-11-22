@@ -14,7 +14,17 @@
     "href": "data.html",
     "title": "2  Data",
     "section": "",
-    "text": "2.1 Description",
+    "text": "2.1 Description\nThis project will use the Swissvotes dataset, the definitive scholarly resource on Swiss federal referendums, which is curated and maintained by the Année Politique Suisse at the University of Bern. The data is collected continuously and updated after every voting Sunday. The dataset contains all votes from 1848 up until the latest ones in late 2025. The dataset is provided as a single, wide-format CSV or Excel file containing 700 rows of data and several hundred columns, detailing everything from vote characteristics and national outcomes to granular cantonal results and party positions. The data accounts for 681 votes. Some of these rows represent counter-proposals or tie-breaker questions, which are linked to a primary vote but counted separately in the dataset. A preliminary review confirms that missing values are coded as both full stops (.) and empty cells (““), which will be handled during data import. As the”Missing Data Analysis” section will detail, this missingness is not random but overwhelmingly systematic and historical. It is concentrated in older votes, before granular data like parliamentary vote tallies or campaign finance was consistently archived. This is a known constraint of the data, not a flaw, and it means that while core analyses can span the full 175-year period, certain research questions will be necessarily focused on the modern era. The dataset is publicly available under a Creative Commons Attribution 4.0 International License. While Swissvotes provides an exhaustive list of its official sources, it does not publish its raw code or collection methodology, so this analysis relies on the accuracy of the provided data.\nThe dataset and all related documentation are publicly available and sourced from the following links of Swissvotes:",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data</span>"
+    ]
+  },
+  {
+    "objectID": "data.html#description",
+    "href": "data.html#description",
+    "title": "2  Data",
+    "section": "",
+    "text": "Data in CSV Format (This is the file used for the project)\nCodebook (Provides detailed explanations for all variables. Note: Document is in German.)\nAbbreviations List (List of sources and abbreviations used in vote descriptions. Note: Document is in German.)",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Data</span>"
     ]
