@@ -1,64 +1,72 @@
-This repo contains a [Quarto book](https://quarto.org/docs/books/) template for the EDAV final project.
+![](swiss-votes-logo.png){width="200px" fig-alt="An icon combining the red Swiss shield with a white cross and a ballot box indicating a vote."}
 
-## Follow these instructions carefully
+# 175 Years of Direct Democracy: A Quantitative Analysis of Swiss Federal Votes
 
-*If you have any difficulties or have feedback of any kind, please [file an issue](https://github.com/jtr13/quarto-edav-template/issues) or ask questions in the [Discussions](https://github.com/jtr13/quarto-edav-template/discussions) section.*
+[![View Live Project](https://img.shields.io/badge/View-Live_Project-blue?style=for-the-badge&logo=github)](https://alex-is-busy-coding.github.io/swiss-votes-viz/)
 
-[Video tutorial](https://www.youtube.com/watch?v=emgS2JI4jCk) (walkthrough of steps below)
+## Overview
 
-### Copy this template (GitHub)
+This repository contains the source code, data analysis, and visualization scripts for a Quarto book project exploring the history and patterns of Swiss Direct Democracy.
 
-- [ ] 1. Click the green "Use this template" button above and choose "Create a new repository". If you don't see the "Use this template" option, **log in to GitHub**. DO NOT FORK THE REPO. Choose a descriptive name for your repo, such as "federalbudget" or "AIDSdeaths". (If you change your topic before you do any work, delete the repo and start over.)
+Unlike standard representative democracies, Switzerland allows citizens to vote directly on federal laws and constitutional amendments up to four times a year. Utilizing the **Swissvotes** dataset, this project analyzes over 175 years of voting data (since 1848) to investigate:
 
-- [ ] 2. Leave the setting for viewing the repo as "Public". (Otherwise, we will not be able to access your rendered book.)
+  * Voter participation trends over time.
+  * The frequency of "Double Majority" conflicts (People vs. Cantons).
+  * The relationship between government recommendations and voter outcomes.
+  * The influence of campaign finance in the modern era.
 
-- [ ] 3. In the Description field, write "Source files for final project" then click "Create repository".
+## Academic Context
 
-### Set up Pages (GitHub)
+This work was produced as the **Final Project** for the Fall 2025 graduate course:
 
-- [ ] 1. You've now left the template page and are viewing your new repo on GitHub. On the home page, click Settings. Click the "Pages" section on the left. In the Build and Deployment section, set Source to "Deploy from a branch" (Classic Pages experience) and Branch to main with /docs folder. Click Save.
+  * **Course:** GR5702 Exploratory Data Analysis & Visualization
+  * **Institution:** Columbia University
+  * **Instructor:** [Joyce Robbins](mailto:jtr13@columbia.edu)
 
-- [ ] 2. Click the little gear button near "About" on the top right side of the home page of the repo and check the "Use your Github Pages website" box under "Website". Click "Save changes". Test the link and you should see a web site with a stick figure on it. It may take a few minutes to build so if it's not working do a few more steps and then come back to check.
+##  Tech Stack
 
-### Copy the repo link (GitHub)
+This project is built using the **R** ecosystem and **Quarto** for publishing.
 
-- [ ] 1. Click the green Code button, choose "HTTPS" and copy the link below. It should have the format: https&#xfeff;://github.com/[USERNAME]/[REPONAME].git
+  * **Language:** R
+  * **Framework:** [Quarto](https://quarto.org/) (HTML Book format)
+  * **Hosting:** GitHub Pages
 
-### Clone the repo (RStudio)
+## Repository Structure
 
-- [ ] 1. Clone your new repo with *File, New Project..., Version Control, Git* in RStudio. You will need to paste the link from the previous step in the Repository URL box. If it's not automatically populated, enter the repo name in the "Project directory name:" box. Choose the location of the project.
+```text
+├── docs/                   # Rendered HTML files (Published to GitHub Pages)
+├── scripts/                # R scripts for data cleaning and scraping
+├── swiss-votes-favicon.png # Project icon
+├── swiss-votes-logo.png    # Project logo
+├── index.qmd               # Introduction & project scope
+├── data.qmd                # Data sourcing, description, and cleaning
+├── results.qmd             # Main analysis and visualizations
+├── conclusion.qmd          # Summary of findings
+└── _quarto.yml             # Quarto configuration
+```
 
-### Edit `_quarto.yml` (RStudio)
+## Local Setup
 
-Tip: From the file pane in RStudio, open `README.md`, which contains these instructions. You can delete steps as you complete them.
+To run this project locally on your machine:
 
-- [ ] 1. Change the all caps info in the `title:`, `author:` and `repo-url` fields in the YAML (top) section of `_quarto.yml` to your info. (Note: it's very important to maintain the indenting structure in this file precisely as is -- be careful!)
+1.  **Clone the repository:**
 
-### Render the book (RStudio)
+    ```bash
+    git clone https://github.com/alex-is-busy-coding/swiss-votes-viz.git
+    cd swiss-votes-viz
+    ```
 
-- [ ] 1. If you haven't already, click "Help" "Check for Updates" to make sure you have the latest version of RStudio (and thus have Quarto installed.)
+2.  **Open in RStudio:**
+    Open the `quarto-edav-template.Rproj` file.
 
-- [ ] 2. Render the web site locally by clicking the "Build" tap on the right and then "Render Book".
+3.  **Render the Book:**
+    You can render the entire project via the terminal or R console:
 
-- [ ] 3. Use `browseURL("docs/index.html")` to view your book locally (or just open `docs/index.html` in a browser).
+    ```bash
+    quarto render
+    ```
 
-- [ ] 4. If it looks good, commit and push all changed files to GitHub.
-      
-- [ ] 5. Check that the rendered site looks correct on GitHub and that the links back to GitHub (icon on top left, edit this page / report an issue on right) work properly. Note that there is a delay between the time you push the files and when they show up on your sitel You can check the progress by clicking the Actions tab.
+## Author
 
-(You will need to repeat steps 2 and 4 every time you wish to update the book on GitHub Pages.)
-
-### Update README (GitHub or RStudio)
-
-- [ ] 1. Delete the content of this **README** and add a short description of your project in its place. If you're working locally, be sure to commit and push the changes to GitHub.
-
-### Optional
-
-- [ ] 1. Choose a theme from [https://bootswatch.com/](https://bootswatch.com/) and replace "cosmo" in `_quarto.yml` with your prefered theme.
-
-### Additional features
-
-Please consult the official guide to **quarto** book websites: [https://quarto.org/docs/books/](https://quarto.org/docs/books/)
-
-
+The code and quantitative analysis for this project were developed by [Alexander Vassilev](https://github.com/alex-is-busy-coding).
 
