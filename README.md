@@ -1,19 +1,22 @@
 <img src="swiss-votes-logo.png" width="200" alt="An icon combining the red Swiss shield with a white cross and a ballot box indicating a vote.">
 
-# 175 Years of Direct Democracy: A Quantitative Analysis of Swiss Federal Votes
+# 177 Years of Direct Democracy: A Quantitative Analysis of Swiss Federal Votes
 
 [![View Live Project](https://img.shields.io/badge/View-Live_Project-blue?style=for-the-badge&logo=github)](https://alex-is-busy-coding.github.io/swiss-votes-viz/)
 
 ## Overview
 
-This repository contains the source code, data analysis, and visualization scripts for a Quarto book project exploring the history and patterns of Swiss Direct Democracy.
+This repository contains the source code, data analysis, and visualization scripts for a [Quarto book](https://quarto.org/) project exploring the history and patterns of Swiss Direct Democracy.
 
-Unlike standard representative democracies, Switzerland allows citizens to vote directly on federal laws and constitutional amendments up to four times a year. Utilizing the **Swissvotes** dataset, this project analyzes over 175 years of voting data (since 1848) to investigate:
+Unlike standard representative democracies, Switzerland allows citizens to vote directly on federal laws and constitutional amendments up to four times a year. Utilizing the [**Swissvotes**](https://swissvotes.ch/) dataset, this project analyzes *over 650 federal votes* since the founding of the modern state in 1848 to answer fundamental questions about power and participation:
 
-  * Voter participation trends over time.
-  * The frequency of "Double Majority" conflicts (People vs. Cantons).
-  * The relationship between government recommendations and voter outcomes.
-  * The influence of campaign finance in the modern era.
+- **The Cost of Entry:** How difficult is it to actually get an issue on the ballot?
+
+- **The Influence of Power:** Can campaign money buy a result? Or does the media hold the real sway?
+
+- **The Cultural Divide:** Does the "Röstigraben" (the border between Switzerland's language groups) really split the country?
+
+- **The Final Verdict:** In a system designed for compromise, how often does the Parliament actually get its way?
 
 ## Academic Context
 
