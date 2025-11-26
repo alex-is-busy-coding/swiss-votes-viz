@@ -6,7 +6,7 @@ execute:
   echo: true
 
 book:
-  title: "175 Years of Direct Democracy: A Quantitative Analysis of Swiss Federal Votes"
+  title: "177 Years of Direct Democracy: A Quantitative Analysis of Swiss Federal Votes"
   favicon: "swiss-votes-favicon.png"
   author:
     - Alexander Vassilev (av3341)
