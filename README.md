@@ -8,7 +8,7 @@
 
 This repository contains the source code, data analysis, and visualization scripts for a [Quarto book](https://quarto.org/) project exploring the history and patterns of Swiss Direct Democracy.
 
-Unlike standard representative democracies, Switzerland allows citizens to vote directly on federal laws and constitutional amendments up to four times a year. Utilizing the [**Swissvotes**](https://swissvotes.ch/) dataset, this project analyzes *over 650 federal votes* since the founding of the modern state in 1848 to answer fundamental questions about power and participation:
+Unlike standard representative democracies, Switzerland allows citizens to vote directly on federal laws and constitutional amendments up to four times a year. Utilizing the [**Swissvotes**](https://swissvotes.ch/) dataset, this project analyzes **over 650 federal votes** since the founding of the modern state in 1848 to answer fundamental questions about power and participation:
 
 - **The Cost of Entry:** How difficult is it to actually get an issue on the ballot?
 
