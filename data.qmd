@@ -2,14 +2,266 @@
 
 ## Description
 
-This project will use the [**Swissvotes**](https://swissvotes.ch) dataset, the definitive scholarly resource on Swiss federal referendums, which is curated and maintained by the Année Politique Suisse at the University of Bern. The data is collected continuously and updated after every voting Sunday. The dataset contains all votes from 1848 up until the latest ones in late 2025. The dataset is provided as a single, wide-format CSV or Excel file containing 700 rows of data and several hundred columns, detailing everything from vote characteristics and national outcomes to granular cantonal results and party positions. The data accounts for 681 votes. Some of these rows represent counter-proposals or tie-breaker questions, which are linked to a primary vote but counted separately in the dataset. A preliminary review confirms that missing values are coded as both full stops (.) and empty cells (""), which will be handled during data import. As the "Missing Data Analysis” section will detail, this missingness is not random but overwhelmingly systematic and historical. It is concentrated in older votes, before granular data like parliamentary vote tallies or campaign finance was consistently archived. This is a known constraint of the data, not a flaw, and it means that while core analyses can span the full 175-year period, certain research questions will be necessarily focused on the modern era. The dataset is publicly available under a Creative Commons Attribution 4.0 International License. While Swissvotes provides an exhaustive list of its official sources, it does not publish its raw code or collection methodology, so this analysis relies on the accuracy of the provided data.
+This project will use the [**Swissvotes**](https://swissvotes.ch) dataset, the definitive scholarly resource on Swiss federal referendums, which is curated and maintained by the *Année Politique Suisse* at the University of Bern. The data is collected continuously and updated after every voting Sunday. The dataset contains all votes from 1848 up until the latest ones in late 2025. 
+
+The dataset is provided as a single, wide-format CSV file containing 706 rows of data and several hundred columns, ranging from basic vote characteristics and national outcomes to granular cantonal results and party positions. The data accounts for 659 distinct votes, comprising 241 Popular Initiatives, 217 Optional Referendums and 201 Mandatory Referendums. There are also 47 rows representing counter-proposals (43) or tie-breaker questions (4), which are linked to a primary vote but tracked separately. The final 6 rows represent upcoming votes scheduled for 2026, which currently lack outcome data. 
+
+A preliminary review confirms that missing values are coded inconsistently as full stops (.), empty cells (""), or numerical placeholders ("9999"). These will be harmonized during the data cleaning process. Crucially, as the "Missing Data Analysis" section will demonstrate, this missingness is not random but systematic. It reflects the historical evolution of record-keeping. Granular metrics such as campaign data or parliamentary vote tallies were simply not recorded in the 19th century. This constraint requires a methodological split. While legislative trends can be analyzed over the full 177-year period, investigations into campaign dynamics (e.g., advertising) will be restricted to the modern era where data is complete.
+
+The dataset is publicly available under a *Creative Commons Attribution 4.0 International License*. While Swissvotes provides an exhaustive bibliography of its official sources, it does not publish its raw aggregation code. This analysis therefore relies on the accuracy of the provided data.
 
 The dataset and all related documentation are publicly available and sourced from the following links of [Swissvotes](https://swissvotes.ch/page/dataset):
 
-- [Data](https://swissvotes.ch/page/dataset/swissvotes_dataset.csv) in CSV Format (This is the file used for the project)
+- [Data (CSV)](https://swissvotes.ch/page/dataset/swissvotes_dataset.csv): The primary file used for analysis
 
-- [Codebook](https://swissvotes.ch/page/dataset/codebook-de.pdf) (Provides detailed explanations for all variables. Note: Document is in German.)
+- [Codebook](https://swissvotes.ch/page/dataset/codebook-de.pdf): Detailed variable definitions (in German)
 
-- [Abbreviations List](https://swissvotes.ch/page/dataset/kurzbeschreibung-de.pdf) (List of sources and abbreviations used in vote descriptions. Note: Document is in German.)
+- [Abbreviations List](https://swissvotes.ch/page/dataset/kurzbeschreibung-de.pdf): Source list and glossary (in German)
 
-## Missing value analysis
+## Setup
+
+This section loads the necessary tools and defines the visual style.
+
+```{r}
+#| label: setup-config
+#| warning: false
+#| message: false
+
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+
+required_packages <- c(
+  "tidyverse",
+  "janitor",  
+  "scales",      
+  "ggrepel",     
+  "ggalluvial",
+  "RColorBrewer",
+  "lubridate",
+  "gridExtra",
+  "tidyr"
+)
+
+install_and_load <- function(packages) {
+  new_packages <- packages[!(packages %in% installed.packages()[, "Package"])]
+  if (length(new_packages) > 0) {
+    install.packages(new_packages)
+  }
+  invisible(lapply(packages, library, character.only = TRUE))
+}
+
+install_and_load(required_packages)
+
+theme_swiss <- function() {
+  theme_minimal(base_family = "Arial") +
+    theme(
+      plot.title = element_text(face = "bold", size = 16, color = "#2c3e50"),
+      plot.subtitle = element_text(size = 12, color = "#7f8c8d"),
+      axis.title = element_text(face = "bold", size = 10),
+      legend.position = "bottom",
+      panel.grid.minor = element_blank(),
+      strip.text = element_text(face = "bold", hjust = 0)
+    )
+}
+theme_set(theme_swiss())
+```
+
+## Data Preparation
+
+This section downloads the latest dataset from *Swissvotes*.
+
+```{r}
+#| label: load-data
+#| warning: false
+#| message: false
+#| cache: true
+
+DATA_DIR <- "data"
+if (!dir.exists(DATA_DIR)) dir.create(DATA_DIR)
+
+DATA_URL <- "https://swissvotes.ch/page/dataset/swissvotes_dataset.csv"
+CODEBOOK_URL <- "https://swissvotes.ch/page/dataset/codebook-de.pdf"
+REFS_URL <- "https://swissvotes.ch/page/dataset/kurzbeschreibung-de.pdf"
+
+download_if_missing <- function(url, dest_path) {
+  if (!file.exists(dest_path)) {
+    download.file(url, dest_path, mode = "wb")
+  }
+}
+download_if_missing(CODEBOOK_URL, file.path(DATA_DIR, "codebook.pdf"))
+download_if_missing(REFS_URL, file.path(DATA_DIR, "references.pdf"))
+
+file_pattern <- "DATASET.*\\.csv"
+local_files <- list.files(DATA_DIR, pattern = file_pattern, full.names = TRUE)
+
+if (length(local_files) > 0) {
+  file_info <- file.info(local_files)
+  target_file <- rownames(file_info)[which.max(file_info$mtime)]
+  message(paste("Loading latest local file:", basename(target_file)))
+} else {
+  current_date_str <- format(Sys.Date(), "%d-%m-%Y") 
+  new_filename <- paste0("DATASET CSV ", current_date_str, ".csv")
+  target_file <- file.path(DATA_DIR, new_filename)
+  
+  message(paste("Downloading fresh dataset to:", new_filename))
+  download.file(DATA_URL, target_file, mode = "wb")
+}
+
+votes <- read_delim(target_file, delim = ";", na = c(".", "", "9999"), show_col_types = FALSE) |>
+  clean_names() |>
+  mutate(
+    date_vote = as.Date(datum, format = "%d.%m.%Y"),
+    start_date = dmy(dat_start),
+    submit_date = dmy(dat_submit),
+    days_collected = as.numeric(difftime(submit_date, start_date, units = "days")),
+    year = year(date_vote),
+    across(where(is.character), ~ str_remove_all(., "'")),
+    volkja_proz = as.numeric(volkja_proz),
+    inserate_total = as.numeric(inserate_total),
+    inserate_jaanteil = as.numeric(inserate_jaanteil),
+    mediaton_tot = as.numeric(mediaton_tot),
+    bet = as.numeric(bet),
+    nrja = as.numeric(nrja),
+    nrnein = as.numeric(nrnein),
+    ktjaproz = as.numeric(ktjaproz),
+    unter_quorum = as.numeric(unter_quorum), 
+    unter_g = as.numeric(unter_g), 
+    sammelfrist = as.numeric(sammelfrist)
+  )
+```
+
+## Missing Value Analysis
+
+```{r}
+#| label: missing-value-analysis
+#| fig-cap: "Missing Data Analysis: Frequency and Historical Patterns"
+#| fig-height: 12
+#| fig-width: 12
+#| warning: false
+
+var_map <- c(
+  "volkja_proz"       = "Popular Vote % (volkja_proz)",
+  "ktjaproz"          = "Cantonal Vote % (ktjaproz)",
+  "annahme"           = "Outcome (annahme)",
+  "inserate_total"    = "Total Ads Volume (inserate_total)",
+  "inserate_jaanteil" = "Share of 'Yes' Ads (inserate_jaanteil)",
+  "mediaton_tot"      = "Media Tone (mediaton_tot)",
+  "bet"               = "Voter Turnout (bet)",
+  "nrja"              = "National Council Yes (nrja)",
+  "nrnein"            = "National Council No (nrnein)",
+  "d1e1"              = "Policy Domain (d1e1)",
+  "rechtsform"        = "Legal Form (rechtsform)",
+  "sammelfrist"       = "Collection Deadline (sammelfrist)",
+  "dat_start"         = "Start Date (dat_start)",
+  "dat_submit"        = "Submission Date (dat_submit)"
+)
+
+missing_data <- votes |>
+  select(year, all_of(names(var_map))) |>
+  
+  mutate(across(all_of(names(var_map)), ~ case_when(
+    as.character(.) %in% c(".", "", "9999") ~ NA_character_, 
+    is.na(.) ~ NA_character_,                                 
+    TRUE ~ as.character(.)                                    
+  ))) |>
+  
+  pivot_longer(
+    cols = -year,
+    names_to = "code",
+    values_to = "value"
+  ) |>
+  mutate(
+    is_missing = is.na(value),
+    variable_label = recode(code, !!!var_map)
+  )
+
+missing_summary <- missing_data |>
+  group_by(variable_label) |>
+  summarize(
+    pct_missing = mean(is_missing),
+    count_missing = sum(is_missing)
+  ) |>
+  arrange(pct_missing)
+
+ordered_levels <- missing_summary$variable_label
+
+missing_summary <- missing_summary |>
+  mutate(variable_label = factor(variable_label, levels = ordered_levels))
+
+heatmap_data <- missing_data |>
+  mutate(decade = floor(year / 10) * 10) |>
+  group_by(decade, variable_label) |>
+  summarize(pct_missing = mean(is_missing), .groups = "drop") |>
+  complete(decade = seq(from = 1840, to = 2020, by = 10), variable_label) |>
+  mutate(variable_label = factor(variable_label, levels = ordered_levels))
+
+p1 <- ggplot(missing_summary, aes(x = pct_missing, y = variable_label)) +
+  geom_bar(stat = "identity", fill = "#E74C3C", alpha = 0.8, width = 0.7) + 
+  
+  geom_text(aes(label = percent(pct_missing, accuracy = 1)), 
+            hjust = -0.1, size = 3.5, color = "grey30") +
+  
+  scale_x_continuous(labels = percent_format(), limits = c(0, 1.1)) +
+  
+  labs(
+    title = "Missingness by Variable (Overall)",
+    subtitle = "Percentage of votes with missing values (treating '9999', '.', and ' ' as missing)",
+    x = "% Missing",
+    y = NULL
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    panel.grid.major.y = element_blank(),
+    axis.text.y = element_text(size = 10)
+  )
+
+p2 <- ggplot(heatmap_data, aes(x = decade, y = variable_label, fill = pct_missing)) +
+  
+  geom_tile(color = "white", size = 0.2) +
+  
+  scale_fill_gradient(
+    low = "white", 
+    high = "#a50f15",
+    na.value = "grey90", 
+    labels = percent_format(), 
+    name = "% Missing"
+  ) +
+  
+  scale_x_continuous(breaks = seq(1840, 2020, by = 20)) +
+  
+  labs(
+    title = "Structural Missingness: The Timeline",
+    subtitle = "Red = Missing Data. White = Data Present. Grey = No Votes Held (e.g., 1850s).",
+    x = "Decade",
+    y = NULL
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    legend.key.width = unit(1.5, "cm"),
+    panel.grid = element_blank(),
+    axis.text.y = element_text(size = 10)
+  )
+
+grid.arrange(p1, p2, nrow = 2, heights = c(1, 1.2))
+```
+
+To ensure the robustness of our analysis, we must understand the limitations of the *Swissvotes* dataset. While the database covers a massive timespan (1848–Present), data collection standards have evolved significantly over 177 years. The visualization highlights three distinct categories of "missingness":
+
+1. **The "Modern Metric" Gap** (related to Campaign Data): The massive red blocks at the top of the heatmap (Ads and Media Tone) represent a methodological boundary, not data loss. Systematic tracking of advertising volume (`inserate_total`) and media sentiment (`mediaton_tot`) is a recent innovation in political science. Consequently, this data is completely absent prior to the year 2000.
+
+2. **The "Bureaucratic Evolution"** (related to Turnout & Parliament): The middle part of the heatmap visualizes the professionalization of the Swiss state. In the early decades of the Federation (1848–1870s), record-keeping was less standardized.
+
+  - **Turnout** (`bet`): The Federal Chancellery did not systematically record national voter turnout percentages until the late 19th century, explaining the dark red block on the left.
+
+  - **Parliamentary Recommendations** (`nrja`/`nrnein`): Similarly, exact vote counts in the National Council are often missing for early votes, likely because decisions were taken by voice vote or records from the early *Official Bulletin* are incomplete. By 1900, these variables turn white, indicating the establishment of rigorous modern record-keeping.
+
+3. **Logical & Structural Gaps**
+
+  - **Signatures:** The missingness in mobilization dates (`dat_submit`) is largely structural. Mandatory Referendums (constitutional amendments) are automatically triggered by Parliament and do not require signature collection. Therefore, they logically have no dates related to signature collection.
+
+  - **The 1850s Void:** The grey column for the 1850s correctly indicates that no federal votes were held during this decade, a unique period of legislative quiet in Swiss history.
+
+  - **The "Future" Artifact:** The faint red shading in the 2020s for outcome variables (e.g., `annahme`) represents placeholder rows for upcoming votes scheduled in 2026. These entries exist in the database but naturally lack results.
+
+Despite these specific gaps, the core data remains remarkably resilient. The fundamental variables required for our historical analysis (the Legal Form, the Policy Domain, and most importantly, the Outcome) are present for nearly 100% of cases (white rows). This confirms that while we lack contextual data (ads/turnout) for the 1800s, the historical record of decisions made is complete and reliable.
