@@ -1,7 +1,23 @@
 # Introduction
 
-For most Americans, democracy is a major event that happens every two or four years. For me, it is a quarterly routine. Up to four times a year, every Swiss citizen receives an envelope from the government—not to elect a representative, but to vote directly on the laws themselves. Whether it is a constitutional amendment or a challenge to a parliamentary decision, the final word often rests with the voters.
+For most of the world, democracy is a high-stakes event that happens every two or four years. For me, it is a quarterly job.
 
-To an outsider, this system offers a fascinating mix of direct power and complex checks and balances. We don’t just elect officials; we can challenge federal laws (referendums) and even propose our own constitutional amendments (initiatives). However, this is not simple majority rule. Much like the U.S. balances the popular vote with state representation, Switzerland often employs a "Double Majority," requiring specific votes to win both the national popular support and a majority of the 26 cantons to pass.
+Four times a year, I open my mailbox to find a thick envelope from the government. Inside, there are no ballots for politicians, but for the laws themselves. Along with it comes the "Bundesbüchlein", a red booklet where the Federal Council explains the issues and provides a formal recommendation. Whether the topic is a multi-billion franc fighter jet purchase, a technical adjustment to tax law or even a debate on whether farmers should be paid to let cows keep their horns, the final decision rests with me and my fellow citizens.
 
-Using the comprehensive Swissvotes dataset, which covers every federal vote since 1848, this project moves from anecdote to empirical analysis. I will explore the long-term patterns of this system by asking: How often do voters actually follow the government’s official recommendation? Which topics appear most frequently on the ballot? And in a system designed to balance power, how often is the will of the people actually blocked by the "Double Majority" or influenced by campaign cash?
+Being from Switzerland means navigating a fascinating paradox. We are a small nation of 26 sovereign cantons and four distinct languages, yet we are governed by a complex web of checks and balances designed to slow things down. We don't just elect representatives, we reserve the right to overrule them. Through the Optional Referendum, citizens can challenge any new federal law passed by Parliament. Through the Popular Initiative, they can bypass the government entirely to propose constitutional amendments from scratch.
+
+This system transforms the country into a permanent campaign trail. The political process is visible everywhere. Whether outside a bustling train station in Zurich or at a village market in the countryside, you will likely encounter volunteers racing to collect thousands of signatures to trigger a vote. Once qualified, the debate floods the media and plasters the streets with posters.
+
+Yet, this is not simple majority rule. To ensure that linguistic minorities and small rural cantons aren't steamrolled by the populous urban centers, significant changes must often clear the "Double Majority" by winning not just the national popular vote, but a majority of the cantons as well.
+
+Using the comprehensive *Swissvotes* dataset, which covers every federal vote since 1848, this project moves beyond my personal experience to empirical analysis. By visualizing 177 years of decision-making, we will explore the mechanics of this unique political engine:
+
+- **The Cost of Entry:** How difficult is it to actually get an issue on the ballot?
+
+- **The Influence of Power:** Can campaign money buy a result? Or does the media hold the real sway?
+
+- **The Cultural Divide:** Does the "Röstigraben" (the border between the language groups) really split the country?
+
+- **The Final Verdict:** In a system designed for compromise, how often does the Parliament actually get its way?
+
+Welcome to a data-driven tour of the Swiss ballot box!
