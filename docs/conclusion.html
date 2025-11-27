@@ -144,8 +144,16 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#main-takeaways" id="toc-main-takeaways" class="nav-link active" data-scroll-target="#main-takeaways"><span class="header-section-number">4.1</span> Main Takeaways</a></li>
+  <li><a href="#limitations-future-directions" id="toc-limitations-future-directions" class="nav-link" data-scroll-target="#limitations-future-directions"><span class="header-section-number">4.2</span> Limitations &amp; Future Directions</a></li>
+  <li><a href="#lessons-learned" id="toc-lessons-learned" class="nav-link" data-scroll-target="#lessons-learned"><span class="header-section-number">4.3</span> Lessons Learned</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/alex-is-busy-coding/swiss-votes-viz/edit/main/conclusion.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/alex-is-busy-coding/swiss-votes-viz/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -170,15 +178,25 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>This analysis of over 177 years of federal voting data reveals a political system that is far more dynamic and complex than its reputation for stability suggests. Swiss direct democracy has evolved from a 19th-century tool for basic state-building into a high-speed engine of modern “life-management,” regulating everything from pension ages to fighter jet procurement.</p>
+<section id="main-takeaways" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="main-takeaways"><span class="header-section-number">4.1</span> Main Takeaways</h2>
 <p>Three fundamental dynamics define the modern Swiss political landscape:</p>
 <ol type="1">
-<li><p><strong>The Sovereignty of the Voter:</strong> Our analysis challenges several cynical assumptions about democracy. The data shows that financial dominance does not guarantee electoral success (“Money Pits”), nor does media endorsement ensure public support (“The Populist Surprise”). When issues touch on deep moral convictions (like security) or direct financial costs (like the <em>CO2 Act</em>), voters frequently overrule the unified advice of Parliament and the press. The electorate is not passive. It acts as a powerful, selective “Emergency Brake” on the government.</p></li>
+<li><p><strong>The Sovereignty of the Voter:</strong> Our analysis challenges several cynical assumptions about democracy. The data shows that financial dominance does not guarantee electoral success, nor does media endorsement ensure public support. When issues touch on deep moral convictions (like security) or direct financial costs (like the <em>CO2 Act</em>), voters frequently overrule the unified advice of Parliament and the press. The electorate is not passive. It acts as a powerful, selective “Emergency Brake” on the government.</p></li>
 <li><p><strong>The Asymmetry of Power:</strong> The “Legislative Funnel” reveals that the system favors stability over disruption. The Popular Initiative, despite being the most visible instrument, functions primarily as an agenda-setting tool. It forces debates but rarely survives the ballot box. Conversely, the Optional Referendum reveals the strength of the status quo. While interest groups frequently succeed in the “sprint” to trigger a vote, the high acceptance rate of challenged laws confirms that the broader electorate usually aligns with Parliament. The voters possess the power to veto, but they exercise it with extreme caution.</p></li>
 <li><p><strong>The Fracturing Consensus:</strong> Geographically, the data confirms that the <em>Röstigraben</em> is a structural reality, not a myth. The “Duty vs.&nbsp;Right” participation gap and the distinct PCA clusters show two linguistically defined political cultures living side-by-side. However, a new fracture is emerging: the Urban-Rural divide. As cities like Zurich and Basel drift politically leftward away from their rural German-speaking neighbors, the “Double Majority” requirement acts as a critical federalist safety valve, preventing the populous urban centers from dominating the historically rural minority.</p></li>
 </ol>
-<p>Ultimately, the data portrays Switzerland not as a static nation, but as a democracy in acceleration. As the agenda densifies and the issues become more complex, the demands on the citizen continue to grow, testing the limits of a system built on the premise that the voter is always right.</p>
+</section>
+<section id="limitations-future-directions" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="limitations-future-directions"><span class="header-section-number">4.2</span> Limitations &amp; Future Directions</h2>
+<p>However, this exploration is not without limits. As noted in the missing value analysis, the historical depth of the dataset comes at the cost of granularity. We lack campaign and media metrics for the first 150 years, restricting our analysis of “influence” strictly to the modern era. Furthermore, by focusing exclusively on federal votes, we overlook the thousands of cantonal and municipal decisions where the bulk of Swiss political life actually occurs. Future research could bridge these gaps by applying Natural Language Processing (NLP) to the digitized Bundesbüchlein pamphlets to track shifting political rhetoric over time or by diving into the cantonal and local results to map with greater precision the democratic choices of Swiss people.</p>
+</section>
+<section id="lessons-learned" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="lessons-learned"><span class="header-section-number">4.3</span> Lessons Learned</h2>
+<p>The primary lesson learned from this quantitative history is that direct democracy is not a static set of rules, but an adaptive ecosystem. Ultimately, the data portrays Switzerland not as a finished product, but as a democracy in constant change. As the agenda densifies and issues become more complex, the demands on the citizen continue to grow, testing the limits of a system built on the premise that the voter is always right.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -598,7 +616,7 @@ ul.task-list li input[type="checkbox"] {
     </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/alex-is-busy-coding/swiss-votes-viz/edit/main/conclusion.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/alex-is-busy-coding/swiss-votes-viz/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/alex-is-busy-coding/swiss-votes-viz/edit/main/conclusion.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/alex-is-busy-coding/swiss-votes-viz/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>

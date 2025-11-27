@@ -2,12 +2,20 @@
 
 This analysis of over 177 years of federal voting data reveals a political system that is far more dynamic and complex than its reputation for stability suggests. Swiss direct democracy has evolved from a 19th-century tool for basic state-building into a high-speed engine of modern "life-management," regulating everything from pension ages to fighter jet procurement.
 
+## Main Takeaways
+
 Three fundamental dynamics define the modern Swiss political landscape:
 
-1. **The Sovereignty of the Voter:** Our analysis challenges several cynical assumptions about democracy. The data shows that financial dominance does not guarantee electoral success ("Money Pits"), nor does media endorsement ensure public support ("The Populist Surprise"). When issues touch on deep moral convictions (like security) or direct financial costs (like the *CO2 Act*), voters frequently overrule the unified advice of Parliament and the press. The electorate is not passive. It acts as a powerful, selective "Emergency Brake" on the government.
+1. **The Sovereignty of the Voter:** Our analysis challenges several cynical assumptions about democracy. The data shows that financial dominance does not guarantee electoral success, nor does media endorsement ensure public support. When issues touch on deep moral convictions (like security) or direct financial costs (like the *CO2 Act*), voters frequently overrule the unified advice of Parliament and the press. The electorate is not passive. It acts as a powerful, selective "Emergency Brake" on the government.
 
 2. **The Asymmetry of Power:** The "Legislative Funnel" reveals that the system favors stability over disruption. The Popular Initiative, despite being the most visible instrument, functions primarily as an agenda-setting tool. It forces debates but rarely survives the ballot box. Conversely, the Optional Referendum reveals the strength of the status quo. While interest groups frequently succeed in the "sprint" to trigger a vote, the high acceptance rate of challenged laws confirms that the broader electorate usually aligns with Parliament. The voters possess the power to veto, but they exercise it with extreme caution.
 
 3. **The Fracturing Consensus:** Geographically, the data confirms that the *Röstigraben* is a structural reality, not a myth. The "Duty vs. Right" participation gap and the distinct PCA clusters show two linguistically defined political cultures living side-by-side. However, a new fracture is emerging: the Urban-Rural divide. As cities like Zurich and Basel drift politically leftward away from their rural German-speaking neighbors, the "Double Majority" requirement acts as a critical federalist safety valve, preventing the populous urban centers from dominating the historically rural minority.
 
-Ultimately, the data portrays Switzerland not as a static nation, but as a democracy in acceleration. As the agenda densifies and the issues become more complex, the demands on the citizen continue to grow, testing the limits of a system built on the premise that the voter is always right.
+## Limitations & Future Directions
+
+However, this exploration is not without limits. As noted in the missing value analysis, the historical depth of the dataset comes at the cost of granularity. We lack campaign and media metrics for the first 150 years, restricting our analysis of "influence" strictly to the modern era. Furthermore, by focusing exclusively on federal votes, we overlook the thousands of cantonal and municipal decisions where the bulk of Swiss political life actually occurs. Future research could bridge these gaps by applying Natural Language Processing (NLP) to the digitized Bundesbüchlein pamphlets to track shifting political rhetoric over time or by diving into the cantonal and local results to map with greater precision the democratic choices of Swiss people.
+
+## Lessons Learned
+
+The primary lesson learned from this quantitative history is that direct democracy is not a static set of rules, but an adaptive ecosystem. Ultimately, the data portrays Switzerland not as a finished product, but as a democracy in constant change. As the agenda densifies and issues become more complex, the demands on the citizen continue to grow, testing the limits of a system built on the premise that the voter is always right.
