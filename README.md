@@ -26,6 +26,10 @@ This work was produced as the **Final Project** for the Fall 2025 graduate cours
   * **Institution:** Columbia University
   * **Instructor:** [Joyce Robbins](mailto:jtr13@columbia.edu)
 
+**Performance:** Achieved a perfect score of 60/60, marking the highest grade in the cohort.
+
+**Instructor Feedback:** "Excellent project. The graphs are very thoughtful and polished. The narrative is compelling and firmly rooted in the political / historical context. Well done!"
+
 ##  Tech Stack
 
 This project is built using the **R** ecosystem and **Quarto** for publishing.
